@@ -1,1 +1,1 @@
-const cameras = ["support:fu3ls3curity@10.0.208.156","support:fu3ls3curity@10.0.208.158","support:fu3ls3curity@10.0.208.159"]
+const cameras = ["10.0.208.156","10.0.208.158","10.0.208.159"]

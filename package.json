@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/riceyrolling/cam-viewer#readme",
   "dependencies": {
-    "http-proxy": "^1.18.1"
+    "http-proxy": "^1.18.1",
+    "node-static": "^0.7.11"
   }
 }

@@ -1,31 +1,43 @@
 var http = require('http'),
-    httpProxy = require('http-proxy');
- 
+    httpProxy = require('http-proxy'),
+    fs = require('fs'),
+    static = require('node-static');
+
+var file = new (static.Server)(__dirname);
+
+// Import configuration file with user and password
+const auth = require('./config.json');
+const authString = Buffer.from(auth.user + ":" + auth.password, 'utf8').toString('base64')
+
 //
 // Create a proxy server with custom application logic
 //
-var proxy = httpProxy.createProxyServer({});
- 
-// To modify the proxy connection before data is sent, you can listen
-// for the 'proxyReq' event. When the event is fired, you will receive
-// the following arguments:
-// (http.ClientRequest proxyReq, http.IncomingMessage req,
-//  http.ServerResponse res, Object options). This mechanism is useful when
-// you need to modify the proxy request before the proxy connection
-// is made to the target.
-//
-proxy.on('proxyReq', function(proxyReq, req, res, options) {
-  console.log("Got request")
-  proxyReq.setHeader('Authorization', 'Basic c3VwcG9ydDpmdTNsczNjdXJpdHk=');
+var proxy = httpProxy.createProxyServer({
+    proxyTimeout: 5000,
+    timout: 2000
 });
- 
-var server = http.createServer(function(req, res) {
-  // You can define here your custom logic to handle the request
-  // and then proxy the request.
-  proxy.web(req, res, {
-    target: req.url
-  });
+
+proxy.on('error', function (err, req, res) {
+    console.log('proxy error');
+    console.log(err); console.log();
 });
- 
+
+proxy.on('proxyReq', function (proxyReq, req, res, options) {
+    proxyReq.setHeader('Authorization', 'Basic ' + authString);
+});
+
+var server = http.createServer(function (req, res) {
+
+    console.log(req.url)
+    if (req.url.indexOf("http") == 0) {
+        proxy.web(req, res, {
+            target: req.url
+        })
+    } else {
+        file.serve(req, res);
+    }
+
+});
+
 console.log("listening on port 5050")
 server.listen(5050);

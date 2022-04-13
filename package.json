@@ -1,0 +1,23 @@
+{
+  "name": "cam-viewer",
+  "version": "1.0.0",
+  "description": "HTTP Proxy for cam-viewer with basic auth",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riceyrolling/cam-viewer.git"
+  },
+  "author": "Caleb Rocca <caleb@ripplesecurity.com.au>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/riceyrolling/cam-viewer/issues"
+  },
+  "homepage": "https://github.com/riceyrolling/cam-viewer#readme",
+  "dependencies": {
+    "http-proxy": "^1.18.1"
+  }
+}

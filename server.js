@@ -1,17 +1,13 @@
 var http = require('http'),
     httpProxy = require('http-proxy'),
     fs = require('fs'),
-    static = require('node-static');
-
-var file = new (static.Server)(__dirname);
+    static = require('node-static'),
+    file = new (static.Server)(__dirname);
 
 // Import configuration file with user and password
-const auth = require('./config.json');
-const authString = Buffer.from(auth.user + ":" + auth.password, 'utf8').toString('base64')
+const auth = require('./config.json'),
+    authString = Buffer.from(auth.user + ":" + auth.password, 'utf8').toString('base64')
 
-//
-// Create a proxy server with custom application logic
-//
 var proxy = httpProxy.createProxyServer({
     proxyTimeout: 5000,
     timout: 2000

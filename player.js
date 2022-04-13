@@ -1,4 +1,3 @@
-//const { cameras } = import('config.js');
 var currentCamera;
 
 var c = document.getElementById("stream");

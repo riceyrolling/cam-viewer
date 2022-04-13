@@ -15,6 +15,7 @@ var proxy = httpProxy.createProxyServer({});
 // is made to the target.
 //
 proxy.on('proxyReq', function(proxyReq, req, res, options) {
+  console.log("Got request")
   proxyReq.setHeader('Authorization', 'Basic c3VwcG9ydDpmdTNsczNjdXJpdHk=');
 });
  
@@ -22,7 +23,7 @@ var server = http.createServer(function(req, res) {
   // You can define here your custom logic to handle the request
   // and then proxy the request.
   proxy.web(req, res, {
-    target: 'http://127.0.0.1:5050'
+    target: req.url
   });
 });
  

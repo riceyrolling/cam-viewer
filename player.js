@@ -7,7 +7,7 @@ c.height = window.innerHeight;
 async function updateImage() {
     var img = new Image();
 
-    img.src = "http://" + currentCamera + "/record/current.jpg?" + new Date().getTime();
+    img.src = "http://" + currentCamera + "/cgi-bin/image.jpg?camera=right&" + new Date().getTime();
     img.onload = function () { 
         var wrh = img.width / img.height;
         var newWidth = c.width;

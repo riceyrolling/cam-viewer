@@ -1,4 +1,5 @@
 var currentCamera;
+var errCount = 0;
 
 var c = document.getElementById("stream");
 var ctx = c.getContext("2d");
@@ -23,7 +24,7 @@ async function updateImage() {
             var yOffset = newHeight < c.height ? ((c.height - newHeight) / 2) : 0;
 
             ctx.drawImage(img, xOffset, yOffset, newWidth, newHeight);
-
+            errCount = 0;
             resolve()
         }
     })
@@ -46,7 +47,11 @@ async function startStream(config) {
     
     for (;;) {
         let timeout = new Promise((res) => setTimeout(() => {
+            errCount++
             console.error("ERROR: Timeout won race")
+            if (errCount > 10) {
+                location.reload()
+            }
             res("p1")
         }, 5000));
         let imageJob = updateImage();

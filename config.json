@@ -1,5 +1,5 @@
 {
-    "cameras": ["10.0.208.156","10.0.208.158","10.0.208.159"],
+    "cameras": ["http://10.0.208.156/cgi-bin/image.jpg?camera=right","http://10.0.208.158/cgi-bin/image.jpg?","http://10.0.208.159/cgi-bin/image.jpg?camera=left"],
     "user": "support",
     "password": "fu3ls3curity"
 }

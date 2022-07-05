@@ -1,3 +1,4 @@
+import {Mobotix, Hikvision} from './camera.js'
 var currentCamera;
 var errCount = 0;
 
@@ -9,7 +10,7 @@ c.height = window.innerHeight;
 async function updateImage() {
     return new Promise((resolve, reject) => {
         var img = new Image();
-        img.src = "http://" + currentCamera + "/cgi-bin/image.jpg?camera=right&" + new Date().getTime();
+        img.src = currentCamera.snapshotUrl
 
         img.onload = function () {
             var wrh = img.width / img.height;
@@ -30,21 +31,36 @@ async function updateImage() {
     })
 }
 
-function nextCamera(config) {
-    let currentPos = config.cameras.indexOf(currentCamera)
-    if (currentPos == config.cameras.length - 1) {
-        // On last camera
-        currentCamera = config.cameras[0]
-    } else {
-        currentCamera = config.cameras[currentPos + 1]
+async function streamManager(configFile) {
+
+    // Prepare camera objects
+    var streams = []
+    configFile.cameras.forEach(camera => {
+        switch(camera.type) {
+            case "mobotix": streams.push(new Mobotix(camera));
+            break;
+
+            case "hikvision": streams.push(new Hikvision(camera));
+            break;
+        }
+    });
+
+    setTimeout(startPlayer,1000) // wait for first camera to be selected and start player
+
+    for (;;) {
+        for (let index = 0; index < streams.length; index++) {
+            currentCamera = streams[index]
+            await new Promise(resolve =>
+                setTimeout(
+                  () => resolve(),
+                  4000)
+            )
+        }
     }
+
 }
 
-async function startStream(config) {
-    currentCamera = config.cameras[0]
-
-    setInterval(function() { nextCamera(config) }, 4000)
-    
+async function startPlayer() {
     for (;;) {
         let timeout = new Promise((res) => setTimeout(() => {
             errCount++
@@ -61,4 +77,4 @@ async function startStream(config) {
 
 fetch("./config.json").then(res => res.json())
 .then(out =>
-    startStream(out))
+    streamManager(out));

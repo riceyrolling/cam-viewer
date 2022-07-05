@@ -1,5 +1,37 @@
 {
-    "cameras": ["10.0.208.156","10.0.208.158","10.0.208.159"],
-    "user": "support",
-    "password": "fu3ls3curity"
+    "cameras": [
+        {
+            "host": "10.0.208.159",
+            "auth": {
+                "username": "support",
+                "password": "fu3ls3curity"
+            },
+            "type": "mobotix",
+            "options": {
+                "lens": "left"
+            }
+        },
+        {
+            "host": "10.0.208.156",
+            "auth": {
+                "username": "support",
+                "password": "fu3ls3curity"
+            },
+            "type": "mobotix",
+            "options": {
+                "lens": "right"
+            }
+        },
+        {
+            "host": "10.0.208.158",
+            "auth": {
+                "username": "support",
+                "password": "fu3ls3curity"
+            },
+            "type": "mobotix",
+            "options": {
+                "lens": "right"
+            }
+        }
+    ]
 }

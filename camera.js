@@ -77,17 +77,3 @@ export class Hikvision extends Camera {
         }
     }
 }
-
-let cam = new Mobotix(
-        {
-            "host": "10.0.208.159",
-            "auth": {
-                "username": "support",
-                "password": "fu3ls3curity"
-            },
-            "type": "mobotix",
-            "options": {
-                "lens": "right"
-            }
-        })
-console.log(cam.snapshotUrl)

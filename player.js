@@ -4,13 +4,10 @@ var errCount = 0;
 
 var c = document.getElementById("stream");
 var ctx = c.getContext("2d");
-c.width = window.innerWidth;
-c.height = window.innerHeight;
 
 async function updateImage() {
     return new Promise((resolve, reject) => {
         var img = new Image();
-        img.src = currentCamera.snapshotUrl
 
         img.onload = function () {
             var wrh = img.width / img.height;
@@ -23,11 +20,12 @@ async function updateImage() {
 
             var xOffset = newWidth < c.width ? ((c.width - newWidth) / 2) : 0;
             var yOffset = newHeight < c.height ? ((c.height - newHeight) / 2) : 0;
-
             ctx.drawImage(img, xOffset, yOffset, newWidth, newHeight);
-            errCount = 0;
             resolve()
+            errCount = 0;
         }
+
+        img.src = currentCamera.snapshotUrl
     })
 }
 
@@ -75,6 +73,14 @@ async function startPlayer() {
     }
 }
 
-fetch("./config.json").then(res => res.json())
-.then(out =>
-    streamManager(out));
+window.onload = function() {
+    fetch("./config.json").then(res => res.json())
+    .then(out =>
+        streamManager(out))
+}
+
+async function updateScreenSize(){
+    c.width = window.innerWidth;
+    c.height = window.innerHeight;
+}
+setInterval(updateScreenSize,10000)

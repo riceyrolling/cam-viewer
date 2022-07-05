@@ -1,10 +1,10 @@
 {
     "cameras": [
         {
-            "host": "10.0.208.159",
+            "host": "10.0.204.199",
             "auth": {
                 "username": "support",
-                "password": "fu3ls3curity"
+                "password": "support-password"
             },
             "type": "mobotix",
             "options": {
@@ -12,10 +12,10 @@
             }
         },
         {
-            "host": "10.0.208.156",
+            "host": "10.0.204.201",
             "auth": {
                 "username": "support",
-                "password": "fu3ls3curity"
+                "password": "support-password"
             },
             "type": "mobotix",
             "options": {
@@ -23,10 +23,32 @@
             }
         },
         {
-            "host": "10.0.208.158",
+            "host": "10.0.204.203",
             "auth": {
                 "username": "support",
-                "password": "fu3ls3curity"
+                "password": "support-password"
+            },
+            "type": "mobotix",
+            "options": {
+                "lens": "right"
+            }
+        },
+        {
+            "host": "10.0.204.205",
+            "auth": {
+                "username": "support",
+                "password": "support-password"
+            },
+            "type": "mobotix",
+            "options": {
+                "lens": "right"
+            }
+        },
+        {
+            "host": "10.0.204.207",
+            "auth": {
+                "username": "support",
+                "password": "support-password"
             },
             "type": "mobotix",
             "options": {

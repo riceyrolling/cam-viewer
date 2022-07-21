@@ -55,7 +55,6 @@ async function streamManager(configFile) {
             )
         }
     }
-
 }
 
 async function startPlayer() {
@@ -74,6 +73,7 @@ async function startPlayer() {
 }
 
 window.onload = function() {
+    setTimeout(updateScreenSize,10000)
     fetch("./config.json").then(res => res.json())
     .then(out =>
         streamManager(out))
@@ -83,4 +83,3 @@ async function updateScreenSize(){
     c.width = window.innerWidth;
     c.height = window.innerHeight;
 }
-setInterval(updateScreenSize,10000)

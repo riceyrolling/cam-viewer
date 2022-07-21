@@ -8,11 +8,17 @@
                 background-color: black;
                 overflow: hidden; /* Hide scrollbars */
             }
+
+            canvas { 
+                height: 100vh; 
+                width: auto; 
+                display: block;
+              }
         </style>
     </head>
 
     <body>
-        <canvas id="stream" width="500" height="500"></canvas>
+        <canvas id="stream"></canvas>
         
         <script type="module" src="player.js"></script>
     </body>
